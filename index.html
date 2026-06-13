@@ -1,109 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>Miko Pet</title>
 
-<style>
-
-body{
-    margin:0;
-    overflow:hidden;
-    background:transparent;
-}
-
-#pet{
-    position:absolute;
-    bottom:50px;
-    left:100px;
-
-    width:128px;
-    height:128px;
-
-    image-rendering:pixelated;
-}
-
-</style>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<img id="pet" src="cat_idle.gif">
+<div id="hud">
 
-<script>
+    <div>🐱 Miko Lv.<span id="level">1</span></div>
 
-const pet=document.getElementById("pet");
+    <div class="bar">
+        <div id="xpBar"></div>
+    </div>
 
-let x=100;
-let direction=1;
+    <div class="bar hunger">
+        <div id="hungerBar"></div>
+    </div>
 
-const SCREEN=1200;
+</div>
 
-function walk(){
+<img id="pet" src="assets/cat_idle.gif">
 
-    pet.src="cat_walk.gif";
+<div id="effects"></div>
 
-    let distance=Math.random()*300+100;
-
-    let moved=0;
-
-    let interval=setInterval(()=>{
-
-        x+=direction*2;
-
-        pet.style.left=x+"px";
-
-        moved+=2;
-
-        if(moved>=distance){
-
-            clearInterval(interval);
-
-            idle();
-        }
-
-    },20);
-}
-
-function idle(){
-
-    pet.src="cat_idle.gif";
-
-    setTimeout(()=>{
-
-        let action=Math.random();
-
-        if(action<0.3){
-            sleep();
-        }else{
-
-            direction=Math.random()>0.5 ? 1 : -1;
-
-            pet.style.transform=
-            direction===-1 ? "scaleX(-1)" : "scaleX(1)";
-
-            walk();
-        }
-
-    },3000);
-}
-
-function sleep(){
-
-    pet.src="cat_sleep.gif";
-
-    setTimeout(()=>{
-
-        direction=Math.random()>0.5 ? 1 : -1;
-
-        walk();
-
-    },5000);
-}
-
-idle();
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
